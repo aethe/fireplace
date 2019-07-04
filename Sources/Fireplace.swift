@@ -28,6 +28,7 @@ public final class ConsoleLog: Log {
 }
 
 public enum LoggingLevel: String, CaseIterable {
+    case debug
     case info
     case warning
     case error
@@ -76,6 +77,7 @@ public struct PrettyMessageFormatter: MessageFormatter {
     
     private func levelComponent(from message: Message) -> String {
         switch message.level {
+        case .debug: return "🚧"
         case .info: return "💬"
         case .warning: return "⚠️"
         case .error: return "⛔"
@@ -126,6 +128,10 @@ public final class Logger {
     private var logs = [(log: Log, levels: MessagePropertyFilter<LoggingLevel>, tags: MessagePropertyFilter<String>)]()
     
     public func write(_ message: Message) {
+        #if !DEBUG
+        guard message.level != .debug else { return }
+        #endif
+        
         queue.sync {
             logs
                 .filter { $0.levels.test(message.level) && $0.tags.test(message.tags) }
