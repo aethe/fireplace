@@ -14,9 +14,9 @@ public protocol Log: AnyObject {
 
 public final class ConsoleLog: Log {
     private let queue = DispatchQueue(label: "fireplace-console", qos: .utility)
-    private let formatter: MessageFormatter
+    private let formatter: Formatter
     
-    init(formatter: MessageFormatter = PrettyMessageFormatter()) {
+    init(formatter: Formatter = PrettyFormatter()) {
         self.formatter = formatter
     }
     
@@ -27,7 +27,7 @@ public final class ConsoleLog: Log {
     }
 }
 
-public enum LoggingLevel: String, CaseIterable {
+public enum Level: String, CaseIterable {
     case debug
     case info
     case warning
@@ -36,13 +36,13 @@ public enum LoggingLevel: String, CaseIterable {
 
 public struct Message {
     public let text: String
-    public let level: LoggingLevel
+    public let level: Level
     public let tags: [String]
     public let file: String
     public let line: Int
     public let timestamp: Date
     
-    public init(text: String, level: LoggingLevel, tags: [String], file: String = #file, line: Int = #line, timestamp: Date = Date()) {
+    public init(text: String, level: Level, tags: [String], file: String = #file, line: Int = #line, timestamp: Date = Date()) {
         self.text = text
         self.level = level
         self.tags = tags
@@ -52,11 +52,11 @@ public struct Message {
     }
 }
 
-public protocol MessageFormatter {
+public protocol Formatter {
     func string(from message: Message) -> String
 }
 
-public struct PrettyMessageFormatter: MessageFormatter {
+public struct PrettyFormatter: Formatter {
     private let dateFormatter = DateFormatter()
     
     public init() {
@@ -101,7 +101,7 @@ public struct PrettyMessageFormatter: MessageFormatter {
     }
 }
 
-public enum MessagePropertyFilter<T: Hashable> {
+public enum Filter<T: Hashable> {
     case include(Set<T>)
     case exclude(Set<T>)
     case all
@@ -125,7 +125,7 @@ public enum MessagePropertyFilter<T: Hashable> {
 
 public final class Logger {
     private let queue = DispatchQueue(label: "fireplace-logger", qos: .utility)
-    private var logs = [(log: Log, levels: MessagePropertyFilter<LoggingLevel>, tags: MessagePropertyFilter<String>)]()
+    private var logs = [(log: Log, levels: Filter<Level>, tags: Filter<String>)]()
     
     public func write(_ message: Message) {
         #if !DEBUG
@@ -140,15 +140,15 @@ public final class Logger {
         }
     }
     
-    public func write(_ text: String, level: LoggingLevel = .info, tags: [String] = [], file: String = #file, line: Int = #line) {
+    public func write(_ text: String, level: Level = .info, tags: [String] = [], file: String = #file, line: Int = #line) {
         write(Message(text: text, level: level, tags: tags, file: file, line: line))
     }
     
-    public func write(_ text: String, level: LoggingLevel = .info, tags: String..., file: String = #file, line: Int = #line) {
+    public func write(_ text: String, level: Level = .info, tags: String..., file: String = #file, line: Int = #line) {
         write(text, level: level, tags: tags, file: file, line: line)
     }
     
-    public func addLog(_ log: Log, levels: MessagePropertyFilter<LoggingLevel> = .all, tags: MessagePropertyFilter<String> = .all) {
+    public func addLog(_ log: Log, levels: Filter<Level> = .all, tags: Filter<String> = .all) {
         queue.sync {
             logs.append((log, levels, tags))
         }
