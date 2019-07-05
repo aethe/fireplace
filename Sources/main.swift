@@ -43,3 +43,7 @@ logger.write("Failed to find image in app's bundle.", level: .error)
 
 // Use tags to classify messages
 logger.write("User entered search screen.", level: .info, tags: "activity", "navigation")
+
+// Obscure sensitive information
+let accessToken = "SUPER-SECRET-ACCESS-TOKEN"
+logger.write("Received access token: \(Obscured(accessToken)).", level: .info)

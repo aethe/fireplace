@@ -185,6 +185,22 @@ public enum Filter<T: Hashable> {
     }
 }
 
+public struct Obscured: CustomStringConvertible {
+    public let description: String
+    
+    public init(_ value: Any) {
+        #if DEBUG
+        description = "\(value)"
+        #else
+        if let value = value as? AnyHashable {
+            description = "<\(String(UInt(bitPattern: value.hashValue), radix: 16, uppercase: true))>"
+        } else {
+            description = "<!@#$%^&*>"
+        }
+        #endif
+    }
+}
+
 public final class Logger {
     private let queue = DispatchQueue(label: "fireplace-logger", qos: .utility)
     private var logs = [(log: Log, levels: Filter<Level>, tags: Filter<String>)]()
