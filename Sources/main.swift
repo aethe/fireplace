@@ -8,11 +8,21 @@
 
 import Foundation
 
+// Print the default log directory
+if let defaultDirectory = FileLog.defaultDirectoryURL {
+    print("Default log directory: \(defaultDirectory.path).")
+}
+
 // Create a logger
 let logger = Logger()
 
 // Add a console log
 logger.addLog(ConsoleLog())
+
+// Add a file log
+if let log = FileLog() {
+    logger.addLog(log)
+}
 
 // Write a debug message
 // Debug messages don't appear in production

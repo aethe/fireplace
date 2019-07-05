@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import os
 
 public protocol Log: AnyObject {
     func write(_ message: Message)
@@ -24,6 +25,68 @@ public final class ConsoleLog: Log {
         queue.sync {
             print(formatter.string(from: message))
         }
+    }
+}
+
+public final class FileLog: Log {
+    private static let systemLog = OSLog(subsystem: "io.github.aethe.fireplace", category: "file-logging")
+    
+    public static var defaultDirectoryURL: URL? {
+        return FileManager
+            .default
+            .urls(for: .cachesDirectory, in: .userDomainMask)
+            .first?
+            .appendingPathComponent("fireplace")
+    }
+    
+    public let url: URL
+    private let fileHandle: FileHandle
+    private let formatter: Formatter
+    
+    public init?(url: URL, formatter: Formatter = PrettyFormatter()) {
+        if !FileManager.default.fileExists(atPath: url.path) {
+            guard FileManager.default.createFile(atPath: url.path, contents: nil) else {
+                os_log("Could not create a file at %{public}@.", log: FileLog.systemLog, type: .error, url.path)
+                return nil
+            }
+        }
+        
+        guard let fileHandle = try? FileHandle(forWritingTo: url) else {
+            os_log("Could not open a file for writing at %{public}@.", log: FileLog.systemLog, type: .error, url.path)
+            return nil
+        }
+        
+        self.url = url
+        self.fileHandle = fileHandle
+        self.formatter = formatter
+    }
+    
+    public convenience init?(fileName: String, formatter: Formatter = PrettyFormatter()) {
+        guard let directoryURL = FileLog.defaultDirectoryURL else {
+            os_log("Could not get the default directory.", log: FileLog.systemLog, type: .error)
+            return nil
+        }
+        
+        guard let _ = try? FileManager.default.createDirectory(at: directoryURL, withIntermediateDirectories: true) else {
+            os_log("Could not create a directory at %{public}@.", log: FileLog.systemLog, type: .error, directoryURL.path)
+            return nil
+        }
+        
+        let fileURL = directoryURL.appendingPathComponent(fileName)
+        self.init(url: fileURL, formatter: formatter)
+    }
+    
+    public convenience init?(formatter: Formatter = PrettyFormatter()) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd-HH-mm-ssZ"
+        let fileName = "\(dateFormatter.string(from: Date())).txt"
+        self.init(fileName: fileName, formatter: formatter)
+    }
+    
+    public func write(_ message: Message) {
+        guard let data = "\(formatter.string(from: message))\n".data(using: .utf8) else { return }
+        fileHandle.seekToEndOfFile()
+        fileHandle.write(data)
     }
 }
 
