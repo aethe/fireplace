@@ -40,3 +40,6 @@ logger.write("No internet connection.", level: .warning)
 // Write an error message
 // Error messages describe bugs
 logger.write("Failed to find image in app's bundle.", level: .error)
+
+// Use tags to classify messages
+logger.write("User entered search screen.", level: .info, tags: "activity", "navigation")
