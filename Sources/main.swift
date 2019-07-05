@@ -8,42 +8,36 @@
 
 import Foundation
 
-// Print the default log directory
-if let defaultDirectory = FileLog.defaultDirectoryURL {
-    print("Default log directory: \(defaultDirectory.path).")
-}
-
 // Create a logger
 let logger = Logger()
 
-// Add a console log
+// Link the logger to the console
 logger.addLog(ConsoleLog())
 
-// Add a file log
+// Link the logger to a new temporary file
 if let log = FileLog() {
     logger.addLog(log)
 }
 
-// Write a debug message
-// Debug messages don't appear in production
-logger.write("App is running on iPhone Xs.", level: .debug)
+// Link warnings and errors to a special temporary file
+if let log = FileLog(fileName: "bad-things.txt") {
+    logger.addLog(log, levels: .include([.warning, .error]))
+}
 
-// Write an info message
-// Info messages describe generic events
-logger.write("User allowed permission to access location.", level: .info)
-logger.write("If you don't specify level, info is assumed.")
+// Like very bad errors to another special temporary file
+if let log = FileLog(fileName: "very-bad-things.txt") {
+    logger.addLog(log, levels: .include([.error]), tags: .include(["verybad"]))
+}
 
-// Write a warning message
-// Warning messages describe non-bug problems
-logger.write("No internet connection.", level: .warning)
+// Here you will find the files
+if let defaultDirectory = FileLog.defaultDirectoryURL {
+    print("Default log directory: \(defaultDirectory.path)")
+}
 
-// Write an error message
-// Error messages describe bugs
-logger.write("Failed to find image in app's bundle.", level: .error)
-
-// Use tags to classify messages
-logger.write("User entered search screen.", level: .info, tags: "activity", "navigation")
-
-// Obscure sensitive information
-let accessToken = "SUPER-SECRET-ACCESS-TOKEN"
-logger.write("Received access token: \(Obscured(accessToken)).", level: .info)
+// Write some messages
+logger.write("Write debug messages that won't appear in production, like the app is running on John's iPhone Xs.", level: .debug)
+logger.write("Write info messages, like the user has permitted the app to access their current location.", level: .info)
+logger.write("Write warning messages, like the app has no connection to the internet.", level: .warning)
+logger.write("Write error messages, like the app has failed to load an image from the app's bundle, gotta fix that bug.", level: .error)
+logger.write("Add tags to your messages for better categorisation.", level: .info, tags: "likeoninstagram", "ortwitter")
+logger.write("Obscure sensitive information in production because you don't want your users to share their \(Obscured("SUPER-SECRET-TOKENS")) with you.", level: .info, tags: "oauth")
