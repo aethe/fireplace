@@ -127,15 +127,18 @@ public struct PrettyFormatter: Formatter {
     }
     
     public func string(from message: Message) -> String {
-        let components = [
+        let attributes = [
             levelComponent(from: message),
             timestampComponent(from: message),
             locationComponent(from: message),
-            tagComponent(from: message),
-            textComponent(from: message)
+            tagComponent(from: message)
         ]
         
-        return components.joined()
+        let attributeString = attributes
+            .compactMap { $0 }
+            .joined(separator: " ")
+        
+        return [attributeString, message.text].joined(separator: ": ")
     }
     
     private func levelComponent(from message: Message) -> String {
@@ -148,19 +151,15 @@ public struct PrettyFormatter: Formatter {
     }
     
     private func timestampComponent(from message: Message) -> String {
-        return " \(dateFormatter.string(from: message.timestamp))"
+        return "\(dateFormatter.string(from: message.timestamp))"
     }
     
     private func locationComponent(from message: Message) -> String {
-        return " @\(NSString(string: NSString(string: message.file).lastPathComponent).deletingPathExtension):\(message.line)"
+        return "@\(NSString(string: NSString(string: message.file).lastPathComponent).deletingPathExtension):\(message.line)"
     }
     
-    private func tagComponent(from message: Message) -> String {
-        return message.tags.isEmpty ? "" : " \(message.tags.map { "#\($0)" }.joined(separator: " "))"
-    }
-    
-    private func textComponent(from message: Message) -> String {
-        return ": \(message.text)"
+    private func tagComponent(from message: Message) -> String? {
+        return message.tags.isEmpty ? nil : message.tags.joined(separator: " ")
     }
 }
 
