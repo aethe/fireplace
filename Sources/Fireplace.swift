@@ -101,17 +101,17 @@ public struct Message {
     public let text: String
     public let level: Level
     public let tags: [String]
+    public let timestamp: Date
     public let file: String
     public let line: Int
-    public let timestamp: Date
     
-    public init(text: String, level: Level, tags: [String], file: String = #file, line: Int = #line, timestamp: Date = Date()) {
+    public init(text: String, level: Level, tags: [String], timestamp: Date = Date(), file: String = #file, line: Int = #line) {
         self.text = text
         self.level = level
         self.tags = tags
+        self.timestamp = timestamp
         self.file = file
         self.line = line
-        self.timestamp = timestamp
     }
 }
 
