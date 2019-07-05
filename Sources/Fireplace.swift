@@ -159,7 +159,7 @@ public struct PrettyFormatter: Formatter {
     }
     
     private func tagComponent(from message: Message) -> String? {
-        return message.tags.isEmpty ? nil : message.tags.joined(separator: " ")
+        return message.tags.isEmpty ? nil : message.tags.map { "#\($0)" }.joined(separator: " ")
     }
 }
 
