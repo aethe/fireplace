@@ -195,7 +195,7 @@ public struct Obscured: CustomStringConvertible {
         if let value = value as? AnyHashable {
             description = "<\(String(UInt(bitPattern: value.hashValue), radix: 16, uppercase: true))>"
         } else {
-            description = "<!@#$%^&*>"
+            description = "********"
         }
         #endif
     }
