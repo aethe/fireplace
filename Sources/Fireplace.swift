@@ -17,7 +17,7 @@ public final class ConsoleLog: Log {
     private let queue = DispatchQueue(label: "fireplace-console", qos: .utility)
     private let formatter: Formatter
     
-    init(formatter: Formatter = PrettyFormatter()) {
+    public init(formatter: Formatter = PrettyFormatter()) {
         self.formatter = formatter
     }
     
