@@ -38,9 +38,14 @@ public final class ConsoleLog: Log {
     }
 }
 
+/// A log written to a file.
 public final class FileLog: Log {
+    /// The system log for reporting errors related to file log initialisation.
     private static let systemLog = OSLog(subsystem: "io.github.aethe.fireplace", category: "file-logging")
 
+    /// A URL representing the default directory of log files.
+    ///
+    /// Logs are stored in the caches directory by default. It is recommended to use another directory on macOS, since the caches directory is system-wide.
     public static var defaultDirectoryURL: URL? {
         return FileManager
             .default
@@ -49,16 +54,25 @@ public final class FileLog: Log {
             .appendingPathComponent("fireplace")
     }
 
+    /// An automatically generated file name based on the current date and time.
     private static var defaultFileName: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd-HH-mm-ssZ"
         return "\(dateFormatter.string(from: Date())).txt"
     }
 
+    /// The URL representing the location of the associated file.
     public let url: URL
+
+    /// The handle for the associated file.
     private let fileHandle: FileHandle
+
+    /// The formatter used to format messages.
     private let formatter: Formatter
 
+    /// Creates a new file log at a specified URL.
+    /// - Parameter url: The URL representing the file location.
+    /// - Parameter formatter: The formatter used to format messages.
     public init?(url: URL, formatter: Formatter = PrettyFormatter()) {
         if !FileManager.default.fileExists(atPath: url.path) {
             guard FileManager.default.createFile(atPath: url.path, contents: nil) else {
@@ -77,6 +91,9 @@ public final class FileLog: Log {
         self.formatter = formatter
     }
 
+    /// Creates a new file log with a specified name at the default directory.
+    /// - Parameter fileName: The name of the file.
+    /// - Parameter formatter: The formatter used to format messages.
     public convenience init?(fileName: String, formatter: Formatter = PrettyFormatter()) {
         guard let directoryURL = FileLog.defaultDirectoryURL else {
             os_log("Could not get the default directory.", log: FileLog.systemLog, type: .error)
@@ -92,6 +109,9 @@ public final class FileLog: Log {
         self.init(url: fileURL, formatter: formatter)
     }
 
+    /// Creates a new file log with an automatically generated file name at a specified directory.
+    /// - Parameter directoryURL: The URL representing the directory.
+    /// - Parameter formatter: The formatter used to format messages.
     public convenience init?(directoryURL: URL, formatter: Formatter = PrettyFormatter()) {
         guard directoryURL.hasDirectoryPath else {
             os_log("The path %{public}@ does not represent a directory.", log: FileLog.systemLog, type: .error, directoryURL.path)
@@ -101,10 +121,14 @@ public final class FileLog: Log {
         self.init(url: directoryURL.appendingPathComponent(FileLog.defaultFileName), formatter: formatter)
     }
 
+    /// Creates a new file log with an automatically generated file name at the default directory.
+    /// - Parameter formatter: The formatter used to format messages.
     public convenience init?(formatter: Formatter = PrettyFormatter()) {
         self.init(fileName: FileLog.defaultFileName, formatter: formatter)
     }
 
+    /// Writes a message to the associated file.
+    /// - Parameter message: The message to write.
     public func write(_ message: Message) {
         guard let data = "\(formatter.string(from: message))\n".data(using: .utf8) else { return }
         fileHandle.seekToEndOfFile()
