@@ -49,6 +49,12 @@ public final class FileLog: Log {
             .appendingPathComponent("fireplace")
     }
 
+    private static var defaultFileName: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd-HH-mm-ssZ"
+        return "\(dateFormatter.string(from: Date())).txt"
+    }
+
     public let url: URL
     private let fileHandle: FileHandle
     private let formatter: Formatter
@@ -86,11 +92,17 @@ public final class FileLog: Log {
         self.init(url: fileURL, formatter: formatter)
     }
 
+    public convenience init?(directoryURL: URL, formatter: Formatter = PrettyFormatter()) {
+        guard directoryURL.hasDirectoryPath else {
+            os_log("The path %{public}@ does not represent a directory.", log: FileLog.systemLog, type: .error, directoryURL.path)
+            return nil
+        }
+
+        self.init(url: directoryURL.appendingPathComponent(FileLog.defaultFileName), formatter: formatter)
+    }
+
     public convenience init?(formatter: Formatter = PrettyFormatter()) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd-HH-mm-ssZ"
-        let fileName = "\(dateFormatter.string(from: Date())).txt"
-        self.init(fileName: fileName, formatter: formatter)
+        self.init(fileName: FileLog.defaultFileName, formatter: formatter)
     }
 
     public func write(_ message: Message) {
