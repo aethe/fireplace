@@ -172,7 +172,10 @@ public struct Message {
     }
 }
 
+/// A formatter that converts log messages to strings.
 public protocol Formatter {
+    /// Converts a log message to a string.
+    /// - Parameter message: The message to format.
     func string(from message: Message) -> String
 }
 
