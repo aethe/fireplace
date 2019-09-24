@@ -220,23 +220,33 @@ public struct PrettyFormatter: Formatter {
     }
 }
 
+/// A filter to test inclusion to or exclusion from a set.
 public enum Filter<T: Hashable> {
+    /// All values included in the set.
     case include(Set<T>)
+
+    /// All values which are not included in the set.
     case exclude(Set<T>)
+
+    /// All possible values.
     case all
 
-    public func test(_ element: T) -> Bool {
+    /// Tests the value against the filter.
+    /// - Parameter value: The value to test.
+    public func test(_ value: T) -> Bool {
         switch self {
-        case .include(let set): return set.contains(element)
-        case .exclude(let set): return !set.contains(element)
+        case .include(let set): return set.contains(value)
+        case .exclude(let set): return !set.contains(value)
         case .all: return true
         }
     }
 
-    public func test(_ elements: [T]) -> Bool {
+    /// Tests values against the filter.
+    /// - Parameter values: The values to test.
+    public func test(_ values: [T]) -> Bool {
         switch self {
-        case .include(let set): return elements.contains { set.contains($0) }
-        case .exclude(let set): return !elements.contains { set.contains($0) }
+        case .include(let set): return values.contains { set.contains($0) }
+        case .exclude(let set): return !values.contains { set.contains($0) }
         case .all: return true
         }
     }
