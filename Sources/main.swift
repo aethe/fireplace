@@ -12,25 +12,25 @@ import Foundation
 let logger = Logger()
 
 // Link the logger to the console
-logger.addLog(ConsoleLog())
+logger.addLog(Console())
 
 // Link the logger to a new temporary file
-if let log = FileLog() {
+if let log = File() {
     logger.addLog(log)
 }
 
 // Link warnings and errors to a special temporary file
-if let log = FileLog(fileName: "bad-things.txt") {
+if let log = File(name: "bad-things.txt") {
     logger.addLog(log, levels: .include([.warning, .error]))
 }
 
 // Like very bad errors to another special temporary file
-if let log = FileLog(fileName: "very-bad-things.txt") {
+if let log = File(name: "very-bad-things.txt") {
     logger.addLog(log, levels: .include([.error]), tags: .include(["verybad"]))
 }
 
 // Here you will find the files
-if let defaultDirectory = FileLog.defaultDirectoryURL {
+if let defaultDirectory = File.defaultDirectoryURL {
     print("Default log directory: \(defaultDirectory.path)")
 }
 

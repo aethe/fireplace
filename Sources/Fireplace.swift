@@ -17,7 +17,7 @@ public protocol Log: AnyObject {
 }
 
 /// A log written to the console.
-public final class ConsoleLog: Log {
+public final class Console: Log {
     /// The queue on which printing to the console is performed.
     private let queue = DispatchQueue(label: "fireplace-console", qos: .utility)
 
@@ -42,7 +42,7 @@ public final class ConsoleLog: Log {
 }
 
 /// A log written to a file.
-public final class FileLog: Log {
+public final class File: Log {
     /// The system log for reporting errors related to file log initialisation.
     private static let systemLog = OSLog(subsystem: "io.github.aethe.fireplace", category: "file-logging")
 
@@ -58,7 +58,7 @@ public final class FileLog: Log {
     }
 
     /// An automatically generated file name based on the current date and time.
-    private static var defaultFileName: String {
+    private static var defaultName: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd-HH-mm-ssZ"
         return "\(dateFormatter.string(from: Date())).txt"
@@ -68,7 +68,7 @@ public final class FileLog: Log {
     public let url: URL
 
     /// The handle for the associated file.
-    private let fileHandle: FileHandle
+    private let handle: FileHandle
 
     /// The formatter used to format messages.
     private let formatter: Formatter
@@ -79,36 +79,36 @@ public final class FileLog: Log {
     public init?(url: URL, formatter: Formatter = PrettyFormatter()) {
         if !FileManager.default.fileExists(atPath: url.path) {
             guard FileManager.default.createFile(atPath: url.path, contents: nil) else {
-                os_log("Could not create a file at %{public}@.", log: FileLog.systemLog, type: .error, url.path)
+                os_log("Could not create a file at %{public}@.", log: File.systemLog, type: .error, url.path)
                 return nil
             }
         }
 
-        guard let fileHandle = try? FileHandle(forWritingTo: url) else {
-            os_log("Could not open a file for writing at %{public}@.", log: FileLog.systemLog, type: .error, url.path)
+        guard let handle = try? FileHandle(forWritingTo: url) else {
+            os_log("Could not open a file for writing at %{public}@.", log: File.systemLog, type: .error, url.path)
             return nil
         }
 
         self.url = url
-        self.fileHandle = fileHandle
+        self.handle = handle
         self.formatter = formatter
     }
 
     /// Creates a new file log with a specified name at the default directory.
-    /// - Parameter fileName: The name of the file.
+    /// - Parameter name: The name of the file.
     /// - Parameter formatter: The formatter used to format messages.
-    public convenience init?(fileName: String, formatter: Formatter = PrettyFormatter()) {
-        guard let directoryURL = FileLog.defaultDirectoryURL else {
-            os_log("Could not get the default directory.", log: FileLog.systemLog, type: .error)
+    public convenience init?(name: String, formatter: Formatter = PrettyFormatter()) {
+        guard let directoryURL = File.defaultDirectoryURL else {
+            os_log("Could not get the default directory.", log: File.systemLog, type: .error)
             return nil
         }
 
         guard let _ = try? FileManager.default.createDirectory(at: directoryURL, withIntermediateDirectories: true) else {
-            os_log("Could not create a directory at %{public}@.", log: FileLog.systemLog, type: .error, directoryURL.path)
+            os_log("Could not create a directory at %{public}@.", log: File.systemLog, type: .error, directoryURL.path)
             return nil
         }
 
-        let fileURL = directoryURL.appendingPathComponent(fileName)
+        let fileURL = directoryURL.appendingPathComponent(name)
         self.init(url: fileURL, formatter: formatter)
     }
 
@@ -117,25 +117,25 @@ public final class FileLog: Log {
     /// - Parameter formatter: The formatter used to format messages.
     public convenience init?(directoryURL: URL, formatter: Formatter = PrettyFormatter()) {
         guard directoryURL.hasDirectoryPath else {
-            os_log("The path %{public}@ does not represent a directory.", log: FileLog.systemLog, type: .error, directoryURL.path)
+            os_log("The path %{public}@ does not represent a directory.", log: File.systemLog, type: .error, directoryURL.path)
             return nil
         }
 
-        self.init(url: directoryURL.appendingPathComponent(FileLog.defaultFileName), formatter: formatter)
+        self.init(url: directoryURL.appendingPathComponent(File.defaultName), formatter: formatter)
     }
 
     /// Creates a new file log with an automatically generated file name at the default directory.
     /// - Parameter formatter: The formatter used to format messages.
     public convenience init?(formatter: Formatter = PrettyFormatter()) {
-        self.init(fileName: FileLog.defaultFileName, formatter: formatter)
+        self.init(name: File.defaultName, formatter: formatter)
     }
 
     /// Writes a message to the associated file.
     /// - Parameter message: The message to write.
     public func write(_ message: Message) {
         guard let data = "\(formatter.string(from: message))\n".data(using: .utf8) else { return }
-        fileHandle.seekToEndOfFile()
-        fileHandle.write(data)
+        handle.seekToEndOfFile()
+        handle.write(data)
     }
 }
 
