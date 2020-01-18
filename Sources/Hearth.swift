@@ -19,7 +19,7 @@ public protocol Log: AnyObject {
 /// A log written to the console.
 public final class Console: Log {
     /// The queue on which printing to the console is performed.
-    private let queue = DispatchQueue(label: "fireplace-console", qos: .utility)
+    private let queue = DispatchQueue(label: "hearth-console", qos: .utility)
 
     /// The formatter used to format messages.
     private let formatter: Formatter
@@ -44,7 +44,7 @@ public final class Console: Log {
 /// A log written to a file.
 public final class File: Log {
     /// The system log for reporting errors related to file log initialisation.
-    private static let systemLog = OSLog(subsystem: "io.github.aethe.fireplace", category: "file-logging")
+    private static let systemLog = OSLog(subsystem: "io.github.aethe.hearth", category: "file-logging")
 
     /// A URL representing the default directory of log files.
     ///
@@ -54,7 +54,7 @@ public final class File: Log {
             .default
             .urls(for: .cachesDirectory, in: .userDomainMask)
             .first?
-            .appendingPathComponent("fireplace")
+            .appendingPathComponent("io.github.aethe.hearth")
     }
 
     /// An automatically generated file name based on the current date and time.
@@ -306,7 +306,7 @@ public struct Obscured: CustomStringConvertible {
 /// A logger for writing messages to logs.
 public final class Logger {
     /// The queue all logging operations are performed on.
-    private let queue = DispatchQueue(label: "fireplace-logger", qos: .utility)
+    private let queue = DispatchQueue(label: "hearth-logger", qos: .utility)
 
     /// An array of associated logs.
     private var logs = [(log: Log, levels: Filter<Level>, tags: Filter<String>)]()
