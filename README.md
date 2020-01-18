@@ -1,2 +1,2 @@
-# fireplace
-Logging framework for Swift
+# Hearth
+A lightweight logger for Swift
