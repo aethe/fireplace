@@ -311,6 +311,9 @@ public final class Logger {
     /// An array of associated logs.
     private var logs = [(log: Log, levels: Filter<Level>, tags: Filter<String>)]()
 
+    /// Creates a new logger.
+    public init() { }
+
     /// Writes a new message to the associated logs.
     ///
     /// - Parameter message: The message to write.
