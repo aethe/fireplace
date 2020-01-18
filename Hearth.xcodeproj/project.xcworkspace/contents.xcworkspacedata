@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:Fireplace.xcodeproj">
+      location = "self:Hearth.xcodeproj">
    </FileRef>
 </Workspace>
