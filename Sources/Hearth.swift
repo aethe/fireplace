@@ -48,7 +48,7 @@ public final class File: Log {
 
     /// A URL representing the default directory of log files.
     ///
-    /// Logs are stored in the caches directory by default. It is recommended to use another directory on macOS, since the caches directory is system-wide.
+    /// Logs are stored in the caches directory by default. It is recommended to use another directory on macOS, since the cache directory is system-wide.
     public static var defaultDirectoryURL: URL? {
         return FileManager
             .default
