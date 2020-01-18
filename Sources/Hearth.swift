@@ -1,6 +1,6 @@
 //
-//  Fireplace.swift
-//  Fireplace
+//  Hearth.swift
+//  Hearth
 //
 //  Created by Andrey Ufimtsev on 05/06/2019.
 //  Copyright © 2019 Andrey Ufimtsev. All rights reserved.
@@ -19,7 +19,7 @@ public protocol Log: AnyObject {
 /// A log written to the console.
 public final class Console: Log {
     /// The queue on which printing to the console is performed.
-    private let queue = DispatchQueue(label: "fireplace-console", qos: .utility)
+    private let queue = DispatchQueue(label: "hearth-console", qos: .utility)
 
     /// The formatter used to format messages.
     private let formatter: Formatter
@@ -44,17 +44,17 @@ public final class Console: Log {
 /// A log written to a file.
 public final class File: Log {
     /// The system log for reporting errors related to file log initialisation.
-    private static let systemLog = OSLog(subsystem: "io.github.aethe.fireplace", category: "file-logging")
+    private static let systemLog = OSLog(subsystem: "io.github.aethe.hearth", category: "file-logging")
 
     /// A URL representing the default directory of log files.
     ///
-    /// Logs are stored in the caches directory by default. It is recommended to use another directory on macOS, since the caches directory is system-wide.
+    /// Logs are stored in the caches directory by default. It is recommended to use another directory on macOS, since the cache directory is system-wide.
     public static var defaultDirectoryURL: URL? {
         return FileManager
             .default
             .urls(for: .cachesDirectory, in: .userDomainMask)
             .first?
-            .appendingPathComponent("fireplace")
+            .appendingPathComponent("io.github.aethe.hearth")
     }
 
     /// An automatically generated file name based on the current date and time.
@@ -306,10 +306,13 @@ public struct Obscured: CustomStringConvertible {
 /// A logger for writing messages to logs.
 public final class Logger {
     /// The queue all logging operations are performed on.
-    private let queue = DispatchQueue(label: "fireplace-logger", qos: .utility)
+    private let queue = DispatchQueue(label: "hearth-logger", qos: .utility)
 
     /// An array of associated logs.
     private var logs = [(log: Log, levels: Filter<Level>, tags: Filter<String>)]()
+
+    /// Creates a new logger.
+    public init() { }
 
     /// Writes a new message to the associated logs.
     ///
