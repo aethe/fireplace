@@ -62,7 +62,9 @@ public final class Logger {
     ///   - tags: The tags to filter the messages by before writing to the log.
     public func attach(to log: Log, levels: Filter<Level> = .all, tags: Filter<String> = .all, environment: Environment = .any) {
         queue.sync {
-            logs.append((log, levels, tags))
+            environment.execute {
+                logs.append((log, levels, tags))
+            }
         }
     }
 
