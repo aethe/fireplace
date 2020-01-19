@@ -41,6 +41,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		551273B423D471D200E6B6ED /* Hearth */ = {
+			isa = PBXGroup;
+			children = (
+				55E4D11F23D35B9200577DCA /* Hearth.swift */,
+			);
+			path = Hearth;
+			sourceTree = "<group>";
+		};
 		55E4D11723D35B5D00577DCA = {
 			isa = PBXGroup;
 			children = (
@@ -53,7 +61,7 @@
 		55E4D11E23D35B6900577DCA /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				55E4D11F23D35B9200577DCA /* Hearth.swift */,
+				551273B423D471D200E6B6ED /* Hearth */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
