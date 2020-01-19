@@ -1,6 +1,6 @@
 //
 //  Level.swift
-//  Hearth-iOS
+//  Hearth
 //
 //  Created by Andrey Ufimtsev on 19/01/2020.
 //
