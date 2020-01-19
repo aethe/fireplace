@@ -7,14 +7,41 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		55AD25DC23D4991D004B5307 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AD25DB23D4991D004B5307 /* Log.swift */; };
+		55AD25DD23D49939004B5307 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AD25DB23D4991D004B5307 /* Log.swift */; };
+		55AD25DF23D49CAC004B5307 /* Console.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AD25DE23D49CAC004B5307 /* Console.swift */; };
+		55AD25E023D49CB3004B5307 /* Console.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AD25DE23D49CAC004B5307 /* Console.swift */; };
+		55AD25E223D49D0F004B5307 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AD25E123D49D0F004B5307 /* File.swift */; };
+		55AD25E323D49D14004B5307 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AD25E123D49D0F004B5307 /* File.swift */; };
+		55AD25E523D49D2C004B5307 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AD25E423D49D2C004B5307 /* Level.swift */; };
+		55AD25E623D49D33004B5307 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AD25E423D49D2C004B5307 /* Level.swift */; };
+		55AD25E823D49D40004B5307 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AD25E723D49D40004B5307 /* Message.swift */; };
+		55AD25E923D49D45004B5307 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AD25E723D49D40004B5307 /* Message.swift */; };
+		55AD25EB23D49D5F004B5307 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AD25EA23D49D5F004B5307 /* Formatter.swift */; };
+		55AD25EC23D49D5F004B5307 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AD25EA23D49D5F004B5307 /* Formatter.swift */; };
+		55AD25EE23D49D8A004B5307 /* PrettyFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AD25ED23D49D8A004B5307 /* PrettyFormatter.swift */; };
+		55AD25EF23D49D8A004B5307 /* PrettyFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AD25ED23D49D8A004B5307 /* PrettyFormatter.swift */; };
+		55AD25F123D49D9F004B5307 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AD25F023D49D9F004B5307 /* Filter.swift */; };
+		55AD25F223D49D9F004B5307 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AD25F023D49D9F004B5307 /* Filter.swift */; };
+		55AD25F423D49DAB004B5307 /* Obscured.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AD25F323D49DAB004B5307 /* Obscured.swift */; };
+		55AD25F523D49DAB004B5307 /* Obscured.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AD25F323D49DAB004B5307 /* Obscured.swift */; };
+		55AD25F723D49DBB004B5307 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AD25F623D49DBB004B5307 /* Logger.swift */; };
+		55AD25F823D49DBB004B5307 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AD25F623D49DBB004B5307 /* Logger.swift */; };
 		55E4D13A23D35D7100577DCA /* Hearth_iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 55E4D13823D35D7100577DCA /* Hearth_iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		55E4D13E23D35DB000577DCA /* Hearth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E4D11F23D35B9200577DCA /* Hearth.swift */; };
 		55E4D14823D35DC900577DCA /* Hearth_macOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 55E4D14623D35DC900577DCA /* Hearth_macOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		55E4D14C23D35DDE00577DCA /* Hearth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E4D11F23D35B9200577DCA /* Hearth.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		55E4D11F23D35B9200577DCA /* Hearth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hearth.swift; sourceTree = "<group>"; };
+		55AD25DB23D4991D004B5307 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		55AD25DE23D49CAC004B5307 /* Console.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Console.swift; sourceTree = "<group>"; };
+		55AD25E123D49D0F004B5307 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		55AD25E423D49D2C004B5307 /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
+		55AD25E723D49D40004B5307 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		55AD25EA23D49D5F004B5307 /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
+		55AD25ED23D49D8A004B5307 /* PrettyFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrettyFormatter.swift; sourceTree = "<group>"; };
+		55AD25F023D49D9F004B5307 /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
+		55AD25F323D49DAB004B5307 /* Obscured.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Obscured.swift; sourceTree = "<group>"; };
+		55AD25F623D49DBB004B5307 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		55E4D13623D35D7100577DCA /* Hearth.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Hearth.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		55E4D13823D35D7100577DCA /* Hearth_iOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Hearth_iOS.h; sourceTree = "<group>"; };
 		55E4D13923D35D7100577DCA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -44,7 +71,16 @@
 		551273B423D471D200E6B6ED /* Hearth */ = {
 			isa = PBXGroup;
 			children = (
-				55E4D11F23D35B9200577DCA /* Hearth.swift */,
+				55AD25DE23D49CAC004B5307 /* Console.swift */,
+				55AD25E123D49D0F004B5307 /* File.swift */,
+				55AD25F023D49D9F004B5307 /* Filter.swift */,
+				55AD25EA23D49D5F004B5307 /* Formatter.swift */,
+				55AD25E423D49D2C004B5307 /* Level.swift */,
+				55AD25DB23D4991D004B5307 /* Log.swift */,
+				55AD25F623D49DBB004B5307 /* Logger.swift */,
+				55AD25E723D49D40004B5307 /* Message.swift */,
+				55AD25F323D49DAB004B5307 /* Obscured.swift */,
+				55AD25ED23D49D8A004B5307 /* PrettyFormatter.swift */,
 			);
 			path = Hearth;
 			sourceTree = "<group>";
@@ -217,7 +253,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55E4D13E23D35DB000577DCA /* Hearth.swift in Sources */,
+				55AD25F423D49DAB004B5307 /* Obscured.swift in Sources */,
+				55AD25F723D49DBB004B5307 /* Logger.swift in Sources */,
+				55AD25DC23D4991D004B5307 /* Log.swift in Sources */,
+				55AD25E223D49D0F004B5307 /* File.swift in Sources */,
+				55AD25DF23D49CAC004B5307 /* Console.swift in Sources */,
+				55AD25EB23D49D5F004B5307 /* Formatter.swift in Sources */,
+				55AD25EE23D49D8A004B5307 /* PrettyFormatter.swift in Sources */,
+				55AD25E823D49D40004B5307 /* Message.swift in Sources */,
+				55AD25E523D49D2C004B5307 /* Level.swift in Sources */,
+				55AD25F123D49D9F004B5307 /* Filter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -225,7 +270,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55E4D14C23D35DDE00577DCA /* Hearth.swift in Sources */,
+				55AD25F523D49DAB004B5307 /* Obscured.swift in Sources */,
+				55AD25F823D49DBB004B5307 /* Logger.swift in Sources */,
+				55AD25DD23D49939004B5307 /* Log.swift in Sources */,
+				55AD25E323D49D14004B5307 /* File.swift in Sources */,
+				55AD25E023D49CB3004B5307 /* Console.swift in Sources */,
+				55AD25EC23D49D5F004B5307 /* Formatter.swift in Sources */,
+				55AD25EF23D49D8A004B5307 /* PrettyFormatter.swift in Sources */,
+				55AD25E923D49D45004B5307 /* Message.swift in Sources */,
+				55AD25E623D49D33004B5307 /* Level.swift in Sources */,
+				55AD25F223D49D9F004B5307 /* Filter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
