@@ -17,7 +17,7 @@ public final class Console: Log {
 
     /// Creates a new console log.
     ///
-    /// - Parameter formatter: The formatter used to format messages.
+    /// - Parameter formatter: The formatter used to format messages. Defaults to the pretty formatter.
     public init(formatter: Formatter = PrettyFormatter()) {
         self.formatter = formatter
     }

@@ -34,10 +34,10 @@ public final class Logger {
     ///
     /// - Parameters:
     ///   - text: The text of the message.
-    ///   - level: The level of the message.
-    ///   - tags: The tags of the message.
-    ///   - file: The file where the write function was called from.
-    ///   - line: The line where the write function was called from.
+    ///   - level: The level of the message. Defaults to `.info`.
+    ///   - tags: The tags of the message. Defaults to an empty array.
+    ///   - file: The file where the write function was called from. Defaults to the current file.
+    ///   - line: The line where the write function was called from. Defaults to the current line.
     public func write(_ text: String, level: Level = .info, tags: [String] = [], file: String = #file, line: Int = #line) {
         write(Message(text: text, level: level, tags: tags, file: file, line: line))
     }
@@ -46,10 +46,10 @@ public final class Logger {
     ///
     /// - Parameters:
     ///   - text: The text of the message.
-    ///   - level: The level of the message.
+    ///   - level: The level of the message. Defaults to `.info`.
     ///   - tags: The tags of the message.
-    ///   - file: The file where the write function was called from.
-    ///   - line: The line where the write function was called from.
+    ///   - file: The file where the write function was called from. Defaults to the current file.
+    ///   - line: The line where the write function was called from. Defaults to the current line.
     public func write(_ text: String, level: Level = .info, tags: String..., file: String = #file, line: Int = #line) {
         write(text, level: level, tags: tags, file: file, line: line)
     }
@@ -58,8 +58,9 @@ public final class Logger {
     ///
     /// - Parameters:
     ///   - log: The log to add.
-    ///   - levels: The levels to filter messages by before writing to the log.
-    ///   - tags: The tags to filter the messages by before writing to the log.
+    ///   - levels: The levels to filter messages by before writing to the log. Defaults to `.all`.
+    ///   - tags: The tags to filter the messages by before writing to the log. Defaults to `.all`.
+    ///   - environment: The environment in which the logger should be attached to the log. Defaults to `.any`.
     public func attach(to log: Log, levels: Filter<Level> = .all, tags: Filter<String> = .all, environment: Environment = .any) {
         queue.sync {
             environment.execute {

@@ -42,7 +42,7 @@ public final class File: Log {
 
     /// Creates a new file log at a specified URL.
     /// - Parameter url: The URL representing the file location.
-    /// - Parameter formatter: The formatter used to format messages.
+    /// - Parameter formatter: The formatter used to format messages. Defaults to the pretty formatter.
     public init?(url: URL, formatter: Formatter = PrettyFormatter()) {
         if !FileManager.default.fileExists(atPath: url.path) {
             guard FileManager.default.createFile(atPath: url.path, contents: nil) else {
@@ -63,7 +63,7 @@ public final class File: Log {
 
     /// Creates a new file log with a specified name at the default directory.
     /// - Parameter name: The name of the file.
-    /// - Parameter formatter: The formatter used to format messages.
+    /// - Parameter formatter: The formatter used to format messages. Defaults to the pretty formatter.
     public convenience init?(name: String, formatter: Formatter = PrettyFormatter()) {
         guard let directoryURL = File.defaultDirectoryURL else {
             os_log("Could not get the default directory.", log: File.systemLog, type: .error)
@@ -81,7 +81,7 @@ public final class File: Log {
 
     /// Creates a new file log with an automatically generated file name at a specified directory.
     /// - Parameter directoryURL: The URL representing the directory.
-    /// - Parameter formatter: The formatter used to format messages.
+    /// - Parameter formatter: The formatter used to format messages. Defaults to the pretty formatter.
     public convenience init?(directoryURL: URL, formatter: Formatter = PrettyFormatter()) {
         guard directoryURL.hasDirectoryPath else {
             os_log("The path %{public}@ does not represent a directory.", log: File.systemLog, type: .error, directoryURL.path)
@@ -92,7 +92,7 @@ public final class File: Log {
     }
 
     /// Creates a new file log with an automatically generated file name at the default directory.
-    /// - Parameter formatter: The formatter used to format messages.
+    /// - Parameter formatter: The formatter used to format messages. Defaults to the pretty formatter.
     public convenience init?(formatter: Formatter = PrettyFormatter()) {
         self.init(name: File.defaultName, formatter: formatter)
     }

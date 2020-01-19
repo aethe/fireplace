@@ -32,8 +32,8 @@ public struct Message {
     /// - Parameter level: The level of the message.
     /// - Parameter tags: The tags of the message.
     /// - Parameter timestamp: The timestamp when the message has been recorded. Defaults to the current timestamp.
-    /// - Parameter file: The name of the file where the message has been recorded. Defaults to the name of the current file.
-    /// - Parameter line: The line in the file where the message has been recorded. Defaults to the current line in the file.
+    /// - Parameter file: The name of the file where the message has been recorded. Defaults to the current file.
+    /// - Parameter line: The line in the file where the message has been recorded. Defaults to the current line.
     public init(text: String, level: Level, tags: [String], timestamp: Date = Date(), file: String = #file, line: Int = #line) {
         self.text = text
         self.level = level
