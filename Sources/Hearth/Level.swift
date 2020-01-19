@@ -7,9 +7,6 @@
 
 /// A level of a message written to a log.
 public enum Level: String, CaseIterable {
-    /// Debug messages don't appear in production.
-    case debug
-
     /// Info messages represent neutral events and generic information. Use tags for further message classification.
     case info
 

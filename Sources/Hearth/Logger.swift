@@ -22,10 +22,6 @@ public final class Logger {
     ///
     /// - Parameter message: The message to write.
     public func write(_ message: Message) {
-        #if !DEBUG
-        guard message.level != .debug else { return }
-        #endif
-
         queue.sync {
             logs
                 .filter { $0.levels.test(message.level) && $0.tags.test(message.tags) }

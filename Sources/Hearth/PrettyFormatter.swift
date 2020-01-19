@@ -38,7 +38,6 @@ public struct PrettyFormatter: Formatter {
     /// - Parameter message: The message being formatted.
     private func levelComponent(from message: Message) -> String {
         switch message.level {
-        case .debug: return "🚧"
         case .info: return "💬"
         case .warning: return "⚠️"
         case .error: return "⛔"
