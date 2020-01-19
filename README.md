@@ -10,7 +10,7 @@ Create a logger.
 let logger = Logger()
 ```
 
-Attach the logger to the console or a file.
+Attach the logger to the console or a file (or both).
 
 ```swift
 logger.addLog(Console())
