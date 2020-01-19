@@ -13,8 +13,8 @@ let logger = Logger()
 Attach the logger to the console or a file (or both).
 
 ```swift
-logger.addLog(Console())
-logger.addLog(File()!)
+logger.attach(to: Console())
+logger.attach(to: File()!)
 ```
 
 Write logs.

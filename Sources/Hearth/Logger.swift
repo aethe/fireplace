@@ -58,29 +58,29 @@ public final class Logger {
         write(text, level: level, tags: tags, file: file, line: line)
     }
 
-    /// Adds a new log to the logger.
+    /// Attaches the logger to a new log.
     ///
     /// - Parameters:
     ///   - log: The log to add.
     ///   - levels: The levels to filter messages by before writing to the log.
     ///   - tags: The tags to filter the messages by before writing to the log.
-    public func addLog(_ log: Log, levels: Filter<Level> = .all, tags: Filter<String> = .all) {
+    public func attach(to log: Log, levels: Filter<Level> = .all, tags: Filter<String> = .all) {
         queue.sync {
             logs.append((log, levels, tags))
         }
     }
 
-    /// Removes a specific log from the logger.
+    /// Detaches the logger from a specific log.
     ///
     /// - Parameter log: The log to remove.
-    public func removeLog(_ log: Log) {
+    public func detach(from log: Log) {
         queue.sync {
             logs.removeAll { $0.log === log }
         }
     }
 
-    /// Removes all logs from the logger.
-    public func removeAllLogs() {
+    /// Detaches the logger from all logs.
+    public func detach() {
         queue.sync {
             logs.removeAll()
         }
