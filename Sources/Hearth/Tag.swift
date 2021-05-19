@@ -5,8 +5,6 @@
 //  Created by Andrey Ufimcev on 19/05/2021.
 //
 
-import Foundation
-
 /// A tag used for message classification.
 ///
 /// String literals can be passed wherever a tag is expected.
