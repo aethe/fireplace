@@ -16,7 +16,7 @@ public struct Message {
     public let level: Level
 
     /// The tags of the message.
-    public let tags: [String]
+    public let tags: [Tag]
 
     /// The timestamp when the message has been recorded.
     public let timestamp: Date
@@ -34,7 +34,7 @@ public struct Message {
     /// - Parameter timestamp: The timestamp when the message has been recorded. Defaults to the current timestamp.
     /// - Parameter file: The name of the file where the message has been recorded. Defaults to the current file.
     /// - Parameter line: The line in the file where the message has been recorded. Defaults to the current line.
-    public init(text: String, level: Level, tags: [String], timestamp: Date = Date(), file: String = #file, line: Int = #line) {
+    public init(text: String, level: Level, tags: [Tag], timestamp: Date = Date(), file: String = #file, line: Int = #line) {
         self.text = text
         self.level = level
         self.tags = tags

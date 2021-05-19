@@ -13,7 +13,7 @@ public final class Logger {
     private let queue = DispatchQueue(label: "hearth-logger", qos: .utility)
 
     /// An array of associated logs.
-    private var logs = [(log: Log, levels: Filter<Level>, tags: Filter<String>)]()
+    private var logs = [(log: Log, levels: Filter<Level>, tags: Filter<Tag>)]()
 
     /// Creates a new logger.
     public init() { }
@@ -38,7 +38,7 @@ public final class Logger {
     ///   - tags: The tags of the message. Defaults to an empty array.
     ///   - file: The file where the write function was called from. Defaults to the current file.
     ///   - line: The line where the write function was called from. Defaults to the current line.
-    public func write(_ text: String, level: Level = .info, tags: [String] = [], file: String = #file, line: Int = #line) {
+    public func write(_ text: String, level: Level = .info, tags: [Tag] = [], file: String = #file, line: Int = #line) {
         write(Message(text: text, level: level, tags: tags, file: file, line: line))
     }
 
@@ -50,7 +50,7 @@ public final class Logger {
     ///   - tags: The tags of the message.
     ///   - file: The file where the write function was called from. Defaults to the current file.
     ///   - line: The line where the write function was called from. Defaults to the current line.
-    public func write(_ text: String, level: Level = .info, tags: String..., file: String = #file, line: Int = #line) {
+    public func write(_ text: String, level: Level = .info, tags: Tag..., file: String = #file, line: Int = #line) {
         write(text, level: level, tags: tags, file: file, line: line)
     }
 
@@ -61,7 +61,7 @@ public final class Logger {
     ///   - levels: The levels to filter messages by before writing to the log. Defaults to `.all`.
     ///   - tags: The tags to filter the messages by before writing to the log. Defaults to `.all`.
     ///   - environment: The environment in which the logger should be attached to the log. Defaults to `.any`.
-    public func attach(to log: Log, levels: Filter<Level> = .all, tags: Filter<String> = .all, environment: Environment = .any) {
+    public func attach(to log: Log, levels: Filter<Level> = .all, tags: Filter<Tag> = .all, environment: Environment = .any) {
         queue.sync {
             environment.execute {
                 logs.append((log, levels, tags))

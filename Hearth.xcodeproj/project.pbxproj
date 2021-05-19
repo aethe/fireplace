@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F0EBC532655ABAF009F2B0A /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0EBC522655ABAF009F2B0A /* Tag.swift */; };
+		0F0EBC542655ABAF009F2B0A /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0EBC522655ABAF009F2B0A /* Tag.swift */; };
 		55AD25DC23D4991D004B5307 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AD25DB23D4991D004B5307 /* Log.swift */; };
 		55AD25DD23D49939004B5307 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AD25DB23D4991D004B5307 /* Log.swift */; };
 		55AD25DF23D49CAC004B5307 /* Console.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AD25DE23D49CAC004B5307 /* Console.swift */; };
@@ -34,6 +36,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0F0EBC522655ABAF009F2B0A /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		55AD25DB23D4991D004B5307 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		55AD25DE23D49CAC004B5307 /* Console.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Console.swift; sourceTree = "<group>"; };
 		55AD25E123D49D0F004B5307 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
@@ -85,6 +88,7 @@
 				55AD25E723D49D40004B5307 /* Message.swift */,
 				55AD25F323D49DAB004B5307 /* Obscured.swift */,
 				55AD25ED23D49D8A004B5307 /* PrettyFormatter.swift */,
+				0F0EBC522655ABAF009F2B0A /* Tag.swift */,
 			);
 			path = Hearth;
 			sourceTree = "<group>";
@@ -257,6 +261,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F0EBC532655ABAF009F2B0A /* Tag.swift in Sources */,
 				55AD25F423D49DAB004B5307 /* Obscured.swift in Sources */,
 				55AD25F723D49DBB004B5307 /* Logger.swift in Sources */,
 				55AD25DC23D4991D004B5307 /* Log.swift in Sources */,
@@ -275,6 +280,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F0EBC542655ABAF009F2B0A /* Tag.swift in Sources */,
 				55AD25F523D49DAB004B5307 /* Obscured.swift in Sources */,
 				55AD25F823D49DBB004B5307 /* Logger.swift in Sources */,
 				55AD25DD23D49939004B5307 /* Log.swift in Sources */,
