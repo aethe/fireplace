@@ -18,7 +18,7 @@
 /// ```
 /// extension Tag {
 ///    static var greeting: Tag {
-///        Tag(name: "greeting")
+///        "greeting"
 ///    }
 /// }
 ///
