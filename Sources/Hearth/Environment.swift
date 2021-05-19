@@ -5,7 +5,7 @@
 //  Created by Andrey Ufimtsev on 19/01/2020.
 //
 
-/// An environemtn the app is running in.
+/// An environment the app is running in.
 public enum Environment {
     /// A debug environment.
     case debug
