@@ -26,7 +26,7 @@ logger.write("Hello, World!")
 See the result.
 
 ```
-💬 2020-01-19 17:39:05 +01:00 @AppDelegate:22: Hello, World!
+Hello, World!
 ```
 
 ## Installation
