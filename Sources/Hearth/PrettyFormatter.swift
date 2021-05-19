@@ -11,13 +11,13 @@ import Foundation
 public struct PrettyFormatter: Formatter {
     /// The style used for formatting message levels.
     private let levelStyle: LevelStyle
-    
+
     /// The style used for formatting message timestamps.
     private let timestampStyle: TimestampStyle
-    
+
     /// Indicates whether locations should be included in the output.
     private let includesLocation: Bool
-    
+
     /// Indicates whether tags should be included in the output.
     private let includesTags: Bool
 
@@ -132,7 +132,7 @@ public struct PrettyFormatter: Formatter {
         
         return message.tags.isEmpty ? nil : message.tags.map { "#\($0)" }.joined(separator: " ")
     }
-    
+
     /// A style for formatting message levels.
     public enum LevelStyle {
         /// Message levels are not included in the output.
