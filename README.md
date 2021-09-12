@@ -1,4 +1,4 @@
-# Hearth
+# 🔥 Hearth
 
 ## Usage
 
@@ -17,7 +17,7 @@ logger.attach(to: Console())
 logger.attach(to: File()!)
 ```
 
-Write logs.
+Write messages.
 
 ```swift
 logger.write("Hello, World!")
