@@ -1,5 +1,7 @@
 # 🔥 Hearth
 
+A lightweight and extendable logger for writing console and file based logs in Swift.
+
 ## Usage
 
 ### Basics
