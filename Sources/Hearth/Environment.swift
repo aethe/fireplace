@@ -2,7 +2,7 @@
 //  Environment.swift
 //  Hearth
 //
-//  Created by Andrey Ufimtsev on 19/01/2020.
+//  Created by Andrey Ufimcev on 19/01/2020.
 //
 
 /// An environment the app is running in.

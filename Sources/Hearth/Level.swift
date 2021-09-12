@@ -2,7 +2,7 @@
 //  Level.swift
 //  Hearth
 //
-//  Created by Andrey Ufimtsev on 19/01/2020.
+//  Created by Andrey Ufimcev on 19/01/2020.
 //
 
 /// A level of a message written to a log.

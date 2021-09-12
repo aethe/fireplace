@@ -2,7 +2,7 @@
 //  Logger.swift
 //  Hearth
 //
-//  Created by Andrey Ufimtsev on 19/01/2020.
+//  Created by Andrey Ufimcev on 19/01/2020.
 //
 
 import Foundation

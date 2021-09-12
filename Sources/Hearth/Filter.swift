@@ -2,7 +2,7 @@
 //  Filter.swift
 //  Hearth
 //
-//  Created by Andrey Ufimtsev on 19/01/2020.
+//  Created by Andrey Ufimcev on 19/01/2020.
 //
 
 /// A filter to test inclusion to or exclusion from a set.
