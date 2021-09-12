@@ -40,7 +40,7 @@ public struct PrettyFormatter: Formatter {
         self.timestampStyle = timestampStyle
         self.includesLocation = includesLocation
         self.includesTags = includesTags
-        
+
         switch timestampStyle {
         case .none: break
         case .time: dateFormatter.dateFormat = "HH:mm:ss"
@@ -56,14 +56,14 @@ public struct PrettyFormatter: Formatter {
         let timestampComponent = self.timestampComponent(from: message)
         let locationComponent = self.locationComponent(from: message)
         let tagComponent = self.tagComponent(from: message)
-        
+
         switch (levelComponent, timestampComponent, locationComponent, tagComponent) {
         case (.none, .none, .none, .none):
             return message.text
-            
+
         case (.some(let levelComponent), .none, .none, .none):
             return "\(levelComponent) \(message.text)"
-            
+
         default:
             let attributes = [
                 levelComponent,
@@ -75,7 +75,7 @@ public struct PrettyFormatter: Formatter {
             let attributeString = attributes
                 .compactMap { $0 }
                 .joined(separator: " ")
-            
+
             return [attributeString, message.text].joined(separator: ": ")
         }
     }
@@ -86,7 +86,7 @@ public struct PrettyFormatter: Formatter {
         switch levelStyle {
         case .none:
             return nil
-            
+
         case .text:
             switch message.level {
             case .info: return "[info]"
@@ -109,7 +109,7 @@ public struct PrettyFormatter: Formatter {
         guard timestampStyle != .none else {
             return nil
         }
-        
+
         return "\(dateFormatter.string(from: message.timestamp))"
     }
 
@@ -119,7 +119,7 @@ public struct PrettyFormatter: Formatter {
         guard includesLocation else {
             return nil
         }
-        
+
         return "@\(NSString(string: NSString(string: message.file).lastPathComponent).deletingPathExtension):\(message.line)"
     }
 
@@ -129,7 +129,7 @@ public struct PrettyFormatter: Formatter {
         guard includesTags else {
             return nil
         }
-        
+
         return message.tags.isEmpty ? nil : message.tags.map { "#\($0)" }.joined(separator: " ")
     }
 
@@ -137,10 +137,10 @@ public struct PrettyFormatter: Formatter {
     public enum LevelStyle {
         /// Message levels are not included in the output.
         case none
-        
+
         /// Message levels are represented with text.
         case text
-        
+
         /// Message levels are represented with emojis.
         case emoji
     }
@@ -149,13 +149,13 @@ public struct PrettyFormatter: Formatter {
     public enum TimestampStyle {
         /// Timestamps are not included in the output.
         case none
-        
+
         /// Timestamps are represented as time.
         case time
-        
+
         /// Timestamps are represented as a date and time.
         case dateTime
-        
+
         /// Timestamps are represented as a date, time and a time offset.
         case dateTimeOffset
     }
