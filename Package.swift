@@ -13,13 +13,17 @@ let package = Package(
         .library(
             name: "Hearth",
             targets: ["Hearth"]
-        ),
+        )
     ],
     dependencies: [],
     targets: [
         .target(
             name: "Hearth",
             dependencies: []
+        ),
+        .testTarget(
+            name: "HearthTests",
+            dependencies: ["Hearth"]
         )
     ]
 )
